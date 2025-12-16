@@ -1,6 +1,6 @@
 # AI Agent Instructions
 
-This file serves as the **project-specific entry point** for AI agents working on this Obsidian plugin or theme project. General-purpose instructions are located in the [`.agents`](.agents/) directory.
+This file serves as the **project-specific entry point** for AI agents working on this Obsidian plugin project. General-purpose instructions are located in the [`.agents`](.agents/) directory.
 
 **Note**: The `.agents/` directory contains general-purpose guidance files for Obsidian plugin and theme development.
 
@@ -57,6 +57,8 @@ If this project references specific plugins or themes that are relevant to its d
 - `.ref/themes/theme-name/` - Reference to a specific theme that demonstrates patterns used in this project
 
 **Note**: The 6 core Obsidian projects (obsidian-api, obsidian-sample-plugin, obsidian-developer-docs, obsidian-plugin-docs, obsidian-sample-theme, eslint-plugin) are always relevant and should be in every project's `.ref` folder. Only document project-specific plugins/themes here.
+
+**Note**: While this is a plugin repo, theme references are kept for users who may want to create themes using this template or reference theme-related resources.
 
 **Current project-specific references**: None currently.
 
@@ -267,30 +269,20 @@ If your project needs project-specific versions of multiple `.agents` files (e.g
 
 ---
 
-### Option 4: Start a New Plugin or Theme Project
+### Option 4: Start a New Plugin Project
 
-**Present this option when**: User wants to create a new Obsidian plugin or theme.
+**Present this option when**: User wants to create a new Obsidian plugin.
 
 **Instructions for AI agent** - Follow this funnel:
 
-1. **Initial question**: "What kind of project are you wanting to make?"
-   - If **Plugin** → Go to Plugin Funnel
-   - If **Theme** → Go to Theme Funnel
-
-2. **Plugin Funnel** - Ask these questions in order:
+1. **Plugin Funnel** - Ask these questions in order:
    - "What functionality do you want your plugin to provide?" (core purpose)
    - "Will it need user settings or configuration?" → If yes, point to [commands-settings.md](.agents/commands-settings.md)
    - "What will it interact with?" (vault files, editor, UI components, workspace)
    - "Do you need any external API integrations?" → If yes, review [security-privacy.md](.agents/security-privacy.md) for guidelines
    - "Will it work on mobile, or desktop-only?" → Point to [mobile.md](.agents/mobile.md) and `isDesktopOnly` in [manifest.md](.agents/manifest.md)
 
-3. **Theme Funnel** - Ask these questions in order:
-   - "What visual style are you aiming for?" (color scheme, typography, layout)
-   - "Will it support both light and dark modes?" → Point to CSS variable usage
-   - "Are there specific UI elements you want to customize?" (editor, sidebar, status bar, etc.)
-   - "Do you want to include theme snippets?" → Point to file structure in [file-conventions.md](.agents/file-conventions.md)
-
-4. **After gathering answers**, guide them to:
+2. **After gathering answers**, guide them to:
    - [project-overview.md](.agents/project-overview.md) - Project structure
    - [environment.md](.agents/environment.md) - Setup and tooling
    - [file-conventions.md](.agents/file-conventions.md) - File organization
