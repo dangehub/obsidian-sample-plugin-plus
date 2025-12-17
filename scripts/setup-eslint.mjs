@@ -254,9 +254,16 @@ function fixBuiltinModules(esbuildConfigPath, projectRoot) {
       entryPointIndex < esbuildContextIndex;
     const hasEntryPointDetection = hasCorrectEntryPoint || (hasEntryPointVar && content.includes("existsSync(\"src/main.ts\")") || content.includes("existsSync('src/main.ts')"));
     
+    // Check if the more sophisticated entry point detection pattern exists (with hasSrcMain, hasRootMain, warnings, etc.)
+    // This pattern includes detection of both src/main.ts and main.ts with proper warnings/errors
+    const hasAdvancedEntryPointDetection = /const\s+hasSrcMain\s*=/.test(content) && 
+                                           /const\s+hasRootMain\s*=/.test(content) &&
+                                           /const\s+entryPoint\s*=\s*hasSrcMain/.test(content);
+    
     // Always remove ALL entryPoint declarations first (we'll add it back in the correct place)
     // This ensures we don't have duplicates or incorrectly placed ones
-    if (hasEntryPointVar) {
+    // BUT: Skip removal if the advanced detection pattern exists (it's already correct)
+    if (hasEntryPointVar && !hasAdvancedEntryPointDetection) {
       // Remove comment lines that mention entry point detection
       content = content.replace(/\s*\/\/\s*.*[Dd]etect\s+entry\s+point.*?\n/gi, '');
       content = content.replace(/\s*\/\/\s*.*entry\s+point.*?\n/gi, '');
@@ -271,7 +278,19 @@ function fixBuiltinModules(esbuildConfigPath, projectRoot) {
       console.log('✓ Removed existing entryPoint declaration(s)');
     }
     
-    if (hasHardcodedEntryPoint || (hasEntryPointVar && !hasCorrectEntryPoint)) {
+    // Skip updating if advanced detection pattern already exists
+    if (hasAdvancedEntryPointDetection) {
+      // Already has the full detection pattern with warnings/errors, nothing to do
+      if (hasHardcodedEntryPoint) {
+        // But still fix entryPoints line if it's hardcoded
+        content = content.replace(
+          /(\s+)entryPoints:\s*\[["'](src\/)?main\.ts["']\],?/,
+          "$1entryPoints: [entryPoint],"
+        );
+        updated = true;
+        console.log('✓ Updated esbuild.config.mjs: fixed entryPoints to use entryPoint variable');
+      }
+    } else if (hasHardcodedEntryPoint || (hasEntryPointVar && !hasCorrectEntryPoint)) {
       // Add existsSync import if needed
       if (needsExistsSync) {
         // Find the import statement and add existsSync to it, or add a new import

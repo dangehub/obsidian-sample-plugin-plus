@@ -25,6 +25,9 @@ if (!hasSrcMain && !hasRootMain) {
   process.exit(1);
 }
 
+// Set entry point based on what exists
+const entryPoint = hasSrcMain ? "src/main.ts" : "main.ts";
+
 // Build to dist/ for production releases, root for local development
 const outfile = prod ? "dist/main.js" : "main.js";
 

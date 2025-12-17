@@ -28,4 +28,3 @@ eslint.on('close', (code) => {
 		process.exit(code);
 	}
 });
-
