@@ -132,6 +132,20 @@ The lint commands use `scripts/lint-wrapper.mjs` which adds helpful success mess
 
 > **Tip:** You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
 
+## GitHub Actions Workflows (Optional)
+
+This template includes GitHub Actions workflows in `.github/workflows/`:
+
+- **`lint.yml`** - Automatically checks your code on every push (builds and lints)
+- **`release.yml`** - Automatically creates GitHub releases when you push a version tag
+
+**These workflows are completely optional** - your plugin works fine without them. They're included as a convenience for automated testing and releases.
+
+**If you want to modify the workflows:**
+- You can edit them directly on GitHub.com (no special permissions needed)
+- If you want to push workflow changes via Git, you'll need a Personal Access Token with the `workflow` scope (see [GitHub's documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens))
+- Most users won't need to modify workflows - they work out of the box
+
 ## Adding Your Plugin to the Community Plugin List
 
 - Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines)
