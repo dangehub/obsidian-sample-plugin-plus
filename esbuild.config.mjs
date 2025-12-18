@@ -60,7 +60,9 @@ const context = await esbuild.context({
 });
 
 // Check if this is a one-time build or watch mode
-const isOneTimeBuild = process.argv[2] === "build";
+// Check for "build" or "production" argument - supports both patterns
+const args = process.argv.slice(2);
+const isOneTimeBuild = args.includes("build") || args.includes("production");
 
 if (isOneTimeBuild) {
 	// Production build: build once and exit
@@ -75,6 +77,7 @@ if (isOneTimeBuild) {
 		console.log("   - styles.css");
 	}
 	console.log("\n💡 Upload these files to GitHub releases\n");
+	await context.dispose();
 	process.exit(0);
 } else {
 	// Development mode: watch for changes

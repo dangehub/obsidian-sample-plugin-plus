@@ -2,7 +2,6 @@
 Source: Based on Obsidian developer docs warnings, community patterns, and API best practices
 Last synced: See sync-status.json for authoritative sync dates
 Update frequency: Update as common issues are identified
-Applicability: Plugin
 -->
 
 # Common Pitfalls

@@ -2,7 +2,6 @@
 Source: Based on Obsidian Developer Policies, Plugin Guidelines, and official release checklist
 Last synced: See sync-status.json for authoritative sync dates
 Update frequency: Check Obsidian Developer Policies and Plugin Guidelines for updates
-Applicability: Plugin
 -->
 
 # Release Readiness Checklist
@@ -86,7 +85,7 @@ These checks require user input or confirmation:
 ### GitHub Release
 
 - [ ] **Release created**: GitHub release exists for the version
-- [ ] **Required files attached**: `main.js` (from `dist/main.js` if using production builds), `manifest.json`, `styles.css` (if present) attached as **individual binary assets** (not just in source.zip)
+- [ ] **Required files attached**: `main.js`, `manifest.json`, `styles.css` (if present) attached as **individual binary assets** (not just in source.zip)
 - [ ] **Release name matches version**: Release name/tag exactly matches `manifest.json` version (no "v" prefix)
 
 ### Community Plugin Registration
