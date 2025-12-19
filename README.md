@@ -6,7 +6,7 @@ This project uses TypeScript to provide type checking and documentation. The rep
 
 This sample plugin demonstrates some of the basic functionality the plugin API can do:
 - Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
+- Adds a command "Open modal (simple)" which opens a Modal.
 - Adds a plugin setting tab to the settings page.
 
 ## What Makes This Plus Version Different?
@@ -42,9 +42,18 @@ These tools can significantly improve your plugin development workflow:
 
 ### Hot Reload Plugins
 
+<<<<<<< HEAD
 **[Hot Reload](https://github.com/pjeby/hot-reload)** - Automatically reload your plugin when code changes. Dramatically speeds up development by eliminating manual reloads.
 
 **[Hot Reload Mobile](https://github.com/shabegom/obsidian-hot-reload-mobile)** - Mobile-compatible version of Hot Reload for testing on mobile devices.
+
+## Improve Code Quality with ESLint
+
+[ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code.
+
+- This project already has ESLint preconfigured, you can invoke a check by running `npm run lint`
+- Together with a custom ESLint [plugin](https://github.com/obsidianmd/eslint-plugin-obsidian) for Obsidian specific code guidelines
+- A GitHub action is preconfigured to automatically lint every commit on all branches
 
 ## Quick Start
 
@@ -197,4 +206,4 @@ If you're upgrading an existing plugin and encounter issues:
 
 ## API Documentation
 
-See https://github.com/obsidianmd/obsidian-api
+See https://docs.obsidian.md
