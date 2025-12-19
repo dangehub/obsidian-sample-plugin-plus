@@ -260,10 +260,15 @@ function fixBuiltinModules(esbuildConfigPath, projectRoot) {
                                            /const\s+hasRootMain\s*=/.test(content) &&
                                            /const\s+entryPoint\s*=\s*hasSrcMain/.test(content);
     
+    // Check if there's a simple pattern that should be upgraded to advanced
+    const hasSimplePattern = /const\s+entryPoint\s*=\s*existsSync\(["']src\/main\.ts["']\)\s*\?/.test(content) &&
+                             !hasAdvancedEntryPointDetection;
+    
     // Always remove ALL entryPoint declarations first (we'll add it back in the correct place)
     // This ensures we don't have duplicates or incorrectly placed ones
     // BUT: Skip removal if the advanced detection pattern exists (it's already correct)
-    if (hasEntryPointVar && !hasAdvancedEntryPointDetection) {
+    // ALSO skip removal if we have a simple pattern (we'll upgrade it instead)
+    if (hasEntryPointVar && !hasAdvancedEntryPointDetection && !hasSimplePattern) {
       // Remove comment lines that mention entry point detection
       content = content.replace(/\s*\/\/\s*.*[Dd]etect\s+entry\s+point.*?\n/gi, '');
       content = content.replace(/\s*\/\/\s*.*entry\s+point.*?\n/gi, '');
@@ -289,6 +294,40 @@ function fixBuiltinModules(esbuildConfigPath, projectRoot) {
         );
         updated = true;
         console.log('✓ Updated esbuild.config.mjs: fixed entryPoints to use entryPoint variable');
+      }
+    } else if (hasSimplePattern) {
+      // Upgrade simple pattern to advanced pattern with warnings
+      // Find the simple pattern (with or without comment) and replace it with the advanced one
+      // Match: optional comment, then const entryPoint = existsSync("src/main.ts") ? "src/main.ts" : "main.ts";
+      const simplePatternRegex = /(\/\/\s*Detect\s+entry\s+point[^\n]*\n\s*)?const\s+entryPoint\s*=\s*existsSync\(["']src\/main\.ts["']\)\s*\?[^;]+;/;
+      if (simplePatternRegex.test(content)) {
+        // Find where to insert (before esbuild.context)
+        const esbuildContextMatch = content.match(/(\s*)(const\s+\w+\s*=\s*(?:await\s+)?esbuild\.context\s*\()/);
+        if (esbuildContextMatch) {
+          const indent = esbuildContextMatch[1];
+          const advancedPattern = `${indent}// Detect entry point: prefer src/main.ts, fallback to main.ts
+${indent}const hasSrcMain = existsSync("src/main.ts");
+${indent}const hasRootMain = existsSync("main.ts");
+${indent}
+${indent}if (hasSrcMain && hasRootMain) {
+${indent}  console.warn("WARNING: Both src/main.ts and main.ts exist. Using src/main.ts as entry point.");
+${indent}  console.warn("Consider removing one to avoid confusion.");
+${indent}}
+${indent}if (!hasSrcMain && !hasRootMain) {
+${indent}  console.error("ERROR: Neither src/main.ts nor main.ts found!");
+${indent}  process.exit(1);
+${indent}}
+${indent}
+${indent}// Set entry point based on what exists
+${indent}const entryPoint = hasSrcMain ? "src/main.ts" : "main.ts";
+`;
+          // Remove the simple pattern
+          content = content.replace(simplePatternRegex, '');
+          // Insert advanced pattern before esbuild.context
+          content = content.replace(/(\s*)(const\s+\w+\s*=\s*(?:await\s+)?esbuild\.context\s*\()/, advancedPattern + '$1$2');
+          updated = true;
+          console.log('✓ Upgraded esbuild.config.mjs: enhanced entry point detection with warnings and error handling');
+        }
       }
     } else if (hasHardcodedEntryPoint || (hasEntryPointVar && !hasCorrectEntryPoint)) {
       // Add existsSync import if needed
@@ -345,8 +384,8 @@ function fixBuiltinModules(esbuildConfigPath, projectRoot) {
           // Find the "const prod" line - it's almost always present and right before esbuild.context
           const prodMatch = content.match(/(const\s+prod\s*=.*?;)\s*\n/);
           if (prodMatch) {
-            // Insert entryPoint declaration right after const prod line
-            const entryPointCode = `\n// Detect entry point: prefer src/main.ts, fallback to main.ts\nconst entryPoint = existsSync("src/main.ts") ? "src/main.ts" : "main.ts";\n`;
+            // Insert advanced entry point detection right after const prod line
+            const entryPointCode = `\n// Detect entry point: prefer src/main.ts, fallback to main.ts\nconst hasSrcMain = existsSync("src/main.ts");\nconst hasRootMain = existsSync("main.ts");\n\nif (hasSrcMain && hasRootMain) {\n  console.warn("WARNING: Both src/main.ts and main.ts exist. Using src/main.ts as entry point.");\n  console.warn("Consider removing one to avoid confusion.");\n}\nif (!hasSrcMain && !hasRootMain) {\n  console.error("ERROR: Neither src/main.ts nor main.ts found!");\n  process.exit(1);\n}\n\n// Set entry point based on what exists\nconst entryPoint = hasSrcMain ? "src/main.ts" : "main.ts";\n`;
             content = content.replace(
               /(const\s+prod\s*=.*?;)\s*\n/,
               "$1" + entryPointCode
@@ -358,7 +397,7 @@ function fixBuiltinModules(esbuildConfigPath, projectRoot) {
             for (let i = 0; i < lines.length; i++) {
               if (/^\s*const\s+\w+\s*=\s*(?:await\s+)?esbuild\.context\s*\(/.test(lines[i])) {
                 const indent = lines[i].match(/^(\s*)/)[1];
-                const entryPointCode = `${indent}// Detect entry point: prefer src/main.ts, fallback to main.ts\n${indent}const entryPoint = existsSync("src/main.ts") ? "src/main.ts" : "main.ts";\n`;
+                const entryPointCode = `${indent}// Detect entry point: prefer src/main.ts, fallback to main.ts\n${indent}const hasSrcMain = existsSync("src/main.ts");\n${indent}const hasRootMain = existsSync("main.ts");\n${indent}\n${indent}if (hasSrcMain && hasRootMain) {\n${indent}  console.warn("WARNING: Both src/main.ts and main.ts exist. Using src/main.ts as entry point.");\n${indent}  console.warn("Consider removing one to avoid confusion.");\n${indent}}\n${indent}if (!hasSrcMain && !hasRootMain) {\n${indent}  console.error("ERROR: Neither src/main.ts nor main.ts found!");\n${indent}  process.exit(1);\n${indent}}\n${indent}\n${indent}// Set entry point based on what exists\n${indent}const entryPoint = hasSrcMain ? "src/main.ts" : "main.ts";\n`;
                 lines.splice(i, 0, entryPointCode);
                 content = lines.join('\n');
                 break;
