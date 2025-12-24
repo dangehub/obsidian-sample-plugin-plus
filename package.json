@@ -4,7 +4,6 @@
 	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
 	"main": "main.js",
 	"type": "module",
-	"packageManager": "pnpm@10.20.0",
 	"scripts": {
 		"preinstall": "node scripts/npm-proxy.mjs",
 		"dev": "node esbuild.config.mjs",
@@ -12,9 +11,8 @@
 		"lint": "node scripts/lint-wrapper.mjs",
 		"lint:fix": "node scripts/lint-wrapper.mjs --fix",
 		"version": "node version-bump.mjs && git add manifest.json versions.json",
-		"switch-to-pnpm": "node scripts/switch-to-pnpm.mjs"
+		"upgrade": "node scripts/upgrade.mjs"
 	},
-	"keywords": [],
 	"author": "",
 	"license": "0BSD",
 	"devDependencies": {
@@ -34,5 +32,6 @@
 	},
 	"dependencies": {
 		"obsidian": "latest"
-	}
+	},
+	"packageManager": "pnpm@10.20.0"
 }
