@@ -67,7 +67,7 @@ const commandArgs = usePnpm ? ['exec', ...eslintArgs] : eslintArgs;
 
 const eslint = spawn(command, commandArgs, {
 	stdio: 'inherit',
-	shell: true
+	shell: false
 });
 
 eslint.on('close', (code) => {

@@ -53,7 +53,6 @@ These tools can significantly improve your plugin development workflow:
 
 - This project already has ESLint preconfigured, you can invoke a check by running `pnpm lint`
 - Together with a custom ESLint [plugin](https://github.com/obsidianmd/eslint-plugin-obsidian) for Obsidian specific code guidelines
-- A GitHub action is preconfigured to automatically lint every commit on all branches
 
 ## Quick Start
 
