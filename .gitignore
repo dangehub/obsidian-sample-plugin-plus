@@ -23,3 +23,7 @@ data.json
 
 # Reference materials
 .ref/
+
+# Personal sync scripts (not relevant for template users)
+scripts/sync-agents.ps1
+scripts/sync-agents.sh
