@@ -25,6 +25,7 @@ Applicability: Plugin
 ### Project-Specific Conventions
 
 - **Terminology: Use "properties" not "frontmatter"**: Obsidian prefers the term "properties" over "frontmatter" or "front-matter" when referring to YAML metadata at the top of markdown files. All documentation, code comments, and UI text should use "properties" to align with Obsidian's official terminology.
+- **Terminology: "Markdown" is a proper noun**: "Markdown" must be capitalized in UI text, as it is a proper noun referring to the markup language. All documentation, code comments, and UI text should use "Markdown" (capitalized) to align with standard terminology conventions.
 
 ### Project-Specific References
 
@@ -299,6 +300,7 @@ This documentation is organized into topic-based files in the `.agents/` directo
 - **[environment.md](.agents/environment.md)** - Development environment and tooling (Plugin/Theme)
 - **[file-conventions.md](.agents/file-conventions.md)** - File organization and folder structure (Plugin/Theme)
 - **[coding-conventions.md](.agents/coding-conventions.md)** - Code standards and organization (Plugin)
+- **[obsidian-file-formats.md](.agents/obsidian-file-formats.md)** - Obsidian file formats and syntax (Markdown, Bases, Canvas) (Both)
 
 ### Configuration
 - **[manifest.md](.agents/manifest.md)** - `manifest.json` rules and requirements (Plugin/Theme)
