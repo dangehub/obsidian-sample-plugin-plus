@@ -236,5 +236,5 @@ See [file-conventions.md](file-conventions.md) for details.
 - Wikilinks: `[[Note Name]]`, `[[Note#Heading]]`, `[[Note#^block-id]]`
 - Embeds: `![[Note]]`, `![[image.png|300]]`
 - Callouts: `> [!note]`, `> [!tip] Title`
-- Properties: YAML frontmatter (use "properties" not "frontmatter" in UI text)
+- Properties: YAML properties (always use "properties" in UI text)
 - Tags: `#tag`, `#nested/tag`

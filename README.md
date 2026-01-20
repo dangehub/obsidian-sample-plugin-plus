@@ -15,8 +15,8 @@ This template includes additional tools and documentation to improve your develo
 
 ### AI-Assisted Development System
 
-- **`AGENTS.md`** - Project-specific instructions for AI coding assistants
-- **`.agents/` folder** - Comprehensive development guides, code patterns, and best practices
+- **`AGENTS.md`** - OpenSkills entry point for AI agent guidance
+- **`.agent/skills/` folder** - Specialized skills for development, operations, and technical references
 - Helps AI assistants understand your project structure and coding conventions
 - Provides quick reference guides and common task examples
 
@@ -128,9 +128,9 @@ You can add these enhancements to your existing plugin:
 
 ### Using the AI System
 
-- Read `AGENTS.md` for project-specific instructions
-- Check `.agents/` folder for development guides
-- See `.agents/quick-reference.md` for a one-page cheat sheet
+- Read `AGENTS.md` to understand the OpenSkills system
+- Use `npx openskills read <skill-name>` to load specialized knowledge
+- Check `.agent/skills/*/references/` for deep technical guides
 
 ### Using ESLint
 
