@@ -1,6 +1,6 @@
 # AGENTS
 
-This project uses the OpenSkills system for AI agent guidance.
+This project uses the OpenSkills system for AI agent guidance. General development skills are provided by the [obsidian-dev-skills](https://github.com/davidvkimball/obsidian-dev-skills) repository.
 
 <skills_system priority="1">
 
@@ -25,8 +25,8 @@ Usage notes:
 <available_skills>
 
 <skill>
-<name>obsidian-dev</name>
-<description>Logic patterns, lifecycle management, and core development rules for Obsidian plugins. Load when editing src/main.ts, implementing new features, or handling plugin lifecycle events.</description>
+<name>obsidian-dev-plugins</name>
+<description>Core development patterns for Obsidian plugins. Load when editing src/main.ts, implementing features, handling API calls, or managing plugin lifecycle.</description>
 <location>project</location>
 </skill>
 

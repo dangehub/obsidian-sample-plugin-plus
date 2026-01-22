@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Helper script to update .agents/sync-status.json with current date
+ * Helper script to update .agent/sync-status.json with current date
  * 
  * Usage:
  *   node scripts/update-sync-status.mjs [description]
@@ -17,13 +17,17 @@ import { fileURLToPath } from 'url';
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const projectRoot = join(scriptDir, '..');
-const syncStatusPath = join(projectRoot, '.agent', 'skills', 'obsidian-ops', 'references', 'sync-status.json');
+const syncStatusPath = join(projectRoot, '.agent', 'sync-status.json');
 
 // Get current date in YYYY-MM-DD format
 const today = new Date().toISOString().split('T')[0];
 
-// Get optional description from command line
-const description = process.argv[2] || 'Sync update';
+  // Get required description from command line
+  const description = process.argv[2];
+  if (!description) {
+    console.error('❌ Error: Description required. Usage: node scripts/update-sync-status.mjs "Description of sync"');
+    process.exit(1);
+  }
 
 try {
   // Read current sync-status.json
@@ -42,7 +46,7 @@ try {
   const updatedContent = JSON.stringify(syncStatus, null, 2) + '\n';
   writeFileSync(syncStatusPath, updatedContent, 'utf8');
   
-  console.log(`✓ Updated sync-status.json in obsidian-ops skill`);
+  console.log(`✓ Updated sync-status.json in agent system`);
   console.log(`  - lastFullSync: ${today}`);
   if (description && description !== 'Sync update') {
     console.log(`  - lastSyncSource: ${description}`);
