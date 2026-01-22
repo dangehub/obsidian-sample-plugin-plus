@@ -34,7 +34,7 @@ One-page cheat sheet for common Obsidian plugin development tasks.
 - `add ref ../my-local-plugin` → Creates symlink to local project
 - `check API SettingGroup` → Searches obsidian.d.ts for SettingGroup
 
-**Note**: These commands are interpreted by AI agents and execute the corresponding workflows automatically. See detailed documentation in [AGENTS.md](../AGENTS.md) for full workflows.
+**Note**: These commands are interpreted by AI agents and execute the corresponding workflows automatically. See detailed documentation in [AGENTS.md](../../AGENTS.md) for full workflows.
 
 ## Build Commands
 
@@ -95,7 +95,7 @@ group.addSetting((setting) => {
   setting.setName("Setting").addToggle(/* ... */);
 });
 ```
-See [code-patterns.md](code-patterns.md) for full implementation.
+See [code-patterns.md](../obsidian-dev/references/code-patterns.md) for full implementation.
 
 ### Modal
 ```ts
@@ -223,11 +223,11 @@ manifest.json
 package.json
 ```
 
-See [file-conventions.md](file-conventions.md) for details.
+See [file-conventions.md](../obsidian-ref/references/file-conventions.md) for details.
 
 ## Obsidian File Formats
 
-**For plugins that manipulate vault files**, see [obsidian-file-formats.md](obsidian-file-formats.md) for comprehensive syntax documentation:
+**For plugins that manipulate vault files**, see [obsidian-file-formats.md](../obsidian-ref/references/obsidian-file-formats.md) for comprehensive syntax documentation:
 - **Markdown** (`.md`) - Obsidian Flavored Markdown with wikilinks, callouts, embeds, properties
 - **Bases** (`.base`) - YAML-based database views with filters, formulas, summaries
 - **Canvas** (`.canvas`) - JSON Canvas format for visual canvases
