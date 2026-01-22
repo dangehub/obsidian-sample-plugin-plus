@@ -17,14 +17,14 @@ This template includes additional tools and documentation to improve your develo
 
 This template uses the OpenSkills system with centralized skills from the [obsidian-dev-skills](https://github.com/davidvkimball/obsidian-dev-skills) repository.
 
-**Setup (one-time):**
+**Setup:**
 ```bash
-# 1. Clone the skills repository as a sibling
-cd ..
-git clone https://github.com/davidvkimball/obsidian-dev-skills.git obsidian-dev-skills
+# Run the comprehensive setup script (handles everything)
+.\scripts\setup-ref-links.bat  # Windows
+# or
+bash scripts/setup-ref-links.sh  # macOS/Linux
 
-# 2. Set up symlinks to skills
-cd your-plugin-name
+# Then set up skills symlinks
 .\scripts\setup-skills.ps1  # Windows PowerShell
 # or
 bash scripts/setup-skills.sh  # macOS/Linux
