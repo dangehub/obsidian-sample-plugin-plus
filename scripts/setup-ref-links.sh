@@ -10,20 +10,6 @@ if ! cd "$PROJECT_ROOT"; then
     exit 1
 fi
 
-# Check Node.js version (requires v16+)
-if ! command -v node &> /dev/null; then
-    echo "ERROR: Node.js is not installed or not in PATH"
-    echo "Please install Node.js v16+ from https://nodejs.org/"
-    exit 1
-fi
-
-NODE_VERSION=$(node -v | cut -d'v' -f2 | cut -d'.' -f1)
-if [ "$NODE_VERSION" -lt 16 ]; then
-    echo "ERROR: Node.js v16+ is required (found v$NODE_VERSION)"
-    echo "Please upgrade Node.js from https://nodejs.org/"
-    exit 1
-fi
-
 echo "Setting up symlinks to core Obsidian projects..."
 
 # Central .ref location (one level up from project)
