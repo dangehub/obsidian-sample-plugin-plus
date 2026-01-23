@@ -19,15 +19,16 @@ This template uses the OpenSkills system with skills available via npm package.
   
 **Setup:**  
 ```bash  
-# Install skills as dev dependency  [header-5](#header-5)
-pnpm add -D obsidian-dev-skills  
-  
-# Set up skills from npm package  [header-6](#header-6)
-.\scripts\setup-skills-npm.ps1  # Windows PowerShell  
-# or  [header-7](#header-7)
-bash scripts/setup-skills-npm.sh  # macOS/Linux  
-  
-# Set up reference materials (symlinks to core Obsidian repos)  [header-8](#header-8)
+# 1. Install dependencies (includes obsidian-dev-skills)
+pnpm install
+
+# 2. Initialize localized skill set (.agent/skills/)
+pnpm obsidian-dev-skills
+
+# 3. Align AGENTS.md with available skills
+npx openskills sync
+
+# 4. Set up reference materials (symlinks to core Obsidian repos)
 .\scripts\setup-ref-links.bat  # Windows  
 # or  [header-9](#header-9)
 bash scripts/setup-ref-links.sh  # macOS/Linux
@@ -87,7 +88,8 @@ These tools can significantly improve your plugin development workflow:
 
 1. **Use this template** - Click "Use this template" on GitHub or clone this repo
 2. **Install dependencies**: `pnpm install`
-3. **Optional: Setup reference materials** (recommended):
+3. **Initialize skills**: `pnpm obsidian-dev-skills`
+4. **Optional: Setup reference materials** (recommended):
    - **Windows**: `scripts\setup-ref-links.bat`
    - **macOS/Linux**: `./scripts/setup-ref-links.sh`
 4. **Optional: Setup ESLint** (recommended):
@@ -107,7 +109,11 @@ You can add these enhancements to your existing plugin:
    - `.agents/` folder → Your plugin root
    - `scripts/` folder → Your plugin root
 
-2. **Setup reference materials**:
+2. **Initialize skills**: 
+   - Run `pnpm obsidian-dev-skills` to seed the `.agent/skills/` folder.
+   - Run `npx openskills sync` to update `AGENTS.md`.
+
+3. **Setup reference materials**:
    - **Windows**: `scripts\setup-ref-links.bat`
    - **macOS/Linux**: `./scripts/setup-ref-links.sh`
    - This creates symlinks to Obsidian reference repos in `.ref/` folder
@@ -155,6 +161,9 @@ You can add these enhancements to your existing plugin:
 
 ### Using the AI System
 
+- **Bootstrapping with AI**: Before providing instructions to your AI agent, visit the `prompts/` folder. Copy the `starter-prompt.md`, fill in your project details, and provide it to your agent to perfectly initialize the development environment.
+- **Initialize Skills**: Run `pnpm obsidian-dev-skills` to populate or update the `.agent/skills/` folder with the latest localized knowledge.
+- **Sync Agents**: Run `npx openskills sync` to reflect any skill changes in `AGENTS.md`.
 - Read `AGENTS.md` to understand the OpenSkills system
 - Use `npx openskills read <skill-name>` to load specialized knowledge
 - Check `.agent/skills/*/references/` for deep technical guides
