@@ -33,6 +33,8 @@ Load the following skills to ensure your implementation follows current best pra
 5. **Verify**: 
     - Run `pnpm build`: Must result in zero errors.
     - Run `pnpm lint`: Must result in zero issues. Fix all lints without using `eslint-disable` or `any` types. However, sentence case for UI text can sometimes throw false positives. Just ignore those and move on if so.
-6. **Project Continuity**: Summarize the final architecture and unique conventions into the `./.agent/skills/project/SKILL.md` file for future agents.
+6. **Project Continuity**: 
+    - **Discovery Mandate**: If `./.agent/skills/project/SKILL.md` is currently a template or lacks detail, your first task is to audit the codebase and document the core architecture, key files, and unique conventions before proceeding with implementation.
+    - Summarize the final architecture and unique conventions into the `./.agent/skills/project/SKILL.md` file for future agents.
 
 **Constraints**: Do not perform any `git` operations (commit/push) without explicit approval.
