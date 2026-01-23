@@ -25,7 +25,7 @@ Usage notes:
 <available_skills>
 
 <skill>
-<name>obsidian-dev-plugins</name>
+<name>obsidian-dev</name>
 <description>Core development patterns for Obsidian plugins. Load when editing src/main.ts, implementing features, handling API calls, or managing plugin lifecycle.</description>
 <location>project</location>
 </skill>

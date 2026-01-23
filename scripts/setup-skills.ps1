@@ -1,57 +1,36 @@
-# Setup skills symlinks for Obsidian Plugin Project
-# This script creates symlinks to the obsidian-dev-skills repository
-
-param(
-    [string]$SkillsRepoPath = "$PSScriptRoot\..\..\.ref\obsidian-dev-skills"
-)
-
-$ErrorActionPreference = "Stop"
-
-Write-Host "Setting up skills symlinks for plugin project..." -ForegroundColor Cyan
-
-# Check if skills repo exists
-if (-not (Test-Path $SkillsRepoPath)) {
-    Write-Host "Skills repository not found at: $SkillsRepoPath" -ForegroundColor Red
-    Write-Host "Please run setup-ref-links script first to set up the .ref folder." -ForegroundColor Yellow
-    exit 1
+# setup-skills-npm.ps1  
+  
+$ErrorActionPreference = "Stop"  
+  
+Write-Host "Setting up skills from npm package..." -ForegroundColor Cyan  
+  
+# Check if obsidian-dev-skills is installed  
+$sourcePath = "node_modules/obsidian-dev-skills"  
+if (-not (Test-Path $sourcePath)) {  
+    Write-Host "❌ obsidian-dev-skills not found in node_modules" -ForegroundColor Red  
+    Write-Host "Run: pnpm add -D obsidian-dev-skills" -ForegroundColor Yellow  
+    exit 1  
+}  
+  
+# Ensure .agent/skills exists  
+$skillsDir = ".agent/skills"  
+if (-not (Test-Path $skillsDir)) {  
+    New-Item -ItemType Directory -Path $skillsDir -Force | Out-Null  
+}  
+  
+# Copy skills with error handling  
+try {  
+    Write-Host "Copying obsidian-dev..." -ForegroundColor Gray  
+    Copy-Item "$sourcePath/obsidian-dev-plugins" "$skillsDir/obsidian-dev" -Recurse -Force  
+      
+    Write-Host "Copying obsidian-ops..." -ForegroundColor Gray  
+    Copy-Item "$sourcePath/obsidian-ops" "$skillsDir/obsidian-ops" -Recurse -Force  
+      
+    Write-Host "Copying obsidian-ref..." -ForegroundColor Gray  
+    Copy-Item "$sourcePath/obsidian-ref" "$skillsDir/obsidian-ref" -Recurse -Force  
+      
+    Write-Host "✓ Skills copied successfully" -ForegroundColor Green  
+} catch {  
+    Write-Host "❌ Failed to copy skills: $($_.Exception.Message)" -ForegroundColor Red  
+    exit 1  
 }
-
-$skillsDir = "$PSScriptRoot\..\.agent\skills"
-
-# Create skills directory if it doesn't exist
-if (-not (Test-Path $skillsDir)) {
-    New-Item -ItemType Directory -Path $skillsDir -Force | Out-Null
-}
-
-# Plugin project: use obsidian-dev-plugins
-$skillMappings = @{
-    "obsidian-dev" = "obsidian-dev-plugins"
-    "obsidian-ops" = "obsidian-ops"
-    "obsidian-ref" = "obsidian-ref"
-}
-
-foreach ($targetSkill in $skillMappings.Keys) {
-    $sourceSkill = $skillMappings[$targetSkill]
-    $targetPath = Join-Path $skillsDir $targetSkill
-    $sourcePath = Join-Path $SkillsRepoPath $sourceSkill
-
-    # Remove existing symlink/directory if it exists
-    if (Test-Path $targetPath) {
-        $item = Get-Item $targetPath
-        if ($item.LinkType -eq "Junction" -or $item.LinkType -eq "SymbolicLink") {
-            Remove-Item $targetPath -Force
-        } else {
-            Remove-Item $targetPath -Recurse -Force
-        }
-    }
-
-    # Create symlink
-    Write-Host "Creating symlink: $targetSkill -> $sourceSkill" -ForegroundColor Green
-    cmd /c mklink /J "$targetPath" "$sourcePath" | Out-Null
-}
-
-Write-Host "Plugin skills setup complete!" -ForegroundColor Cyan
-Write-Host "The following skills are now available:" -ForegroundColor Gray
-Write-Host "  - obsidian-dev (plugin development)" -ForegroundColor Gray
-Write-Host "  - obsidian-ops (operations & workflows)" -ForegroundColor Gray
-Write-Host "  - obsidian-ref (technical references)" -ForegroundColor Gray

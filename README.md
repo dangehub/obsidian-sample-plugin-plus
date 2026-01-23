@@ -13,22 +13,24 @@ This sample plugin demonstrates some of the basic functionality the plugin API c
 
 This template includes additional tools and documentation to improve your development experience:
 
-### AI-Assisted Development System
-
-This template uses the OpenSkills system with centralized skills from the [obsidian-dev-skills](https://github.com/davidvkimball/obsidian-dev-skills) repository.
-
-**Setup:**
-```bash
-# Run the comprehensive setup script (handles everything)
-.\scripts\setup-ref-links.bat  # Windows
-# or
+### AI-Assisted Development System  
+  
+This template uses the OpenSkills system with skills available via npm package.  
+  
+**Setup:**  
+```bash  
+# Install skills as dev dependency  [header-5](#header-5)
+pnpm add -D obsidian-dev-skills  
+  
+# Set up skills from npm package  [header-6](#header-6)
+.\scripts\setup-skills-npm.ps1  # Windows PowerShell  
+# or  [header-7](#header-7)
+bash scripts/setup-skills-npm.sh  # macOS/Linux  
+  
+# Set up reference materials (symlinks to core Obsidian repos)  [header-8](#header-8)
+.\scripts\setup-ref-links.bat  # Windows  
+# or  [header-9](#header-9)
 bash scripts/setup-ref-links.sh  # macOS/Linux
-
-# Then set up skills symlinks
-.\scripts\setup-skills.ps1  # Windows PowerShell
-# or
-bash scripts/setup-skills.sh  # macOS/Linux
-```
 
 **What's included:**
 - **`AGENTS.md`** - OpenSkills entry point for AI agent guidance
