@@ -164,7 +164,7 @@ You can add these enhancements to your existing plugin:
 - **Bootstrapping with AI**: Before providing instructions to your AI agent, visit the `prompts/` folder. Copy the `starter-prompt.md`, fill in your project details, and provide it to your agent to perfectly initialize the development environment.
 - **Initialize Skills**: Run `pnpm obsidian-dev-skills` to populate or update the `.agent/skills/` folder with the latest localized knowledge.
 - **Sync Agents**: Run `npx openskills sync` to reflect any skill changes in `AGENTS.md`.
-- Read `AGENTS.md` to understand the OpenSkills system
+- Read `AGENTS.md` for project-specific instructions
 - Use `npx openskills read <skill-name>` to load specialized knowledge
 - Check `.agent/skills/*/references/` for deep technical guides
 
