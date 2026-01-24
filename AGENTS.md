@@ -1,6 +1,6 @@
 # AGENTS
 
-This project uses the OpenSkills system for AI agent guidance. General development skills are provided by the [obsidian-dev-skills](https://github.com/davidvkimball/obsidian-dev-skills) repository.
+This project uses specialized AI agent skills for development.
 
 <skills_system priority="1">
 
@@ -12,7 +12,6 @@ When users ask you to perform tasks, check if any of the available skills below 
 
 How to use skills:
 - Read skill: `cat ./.agent/skills/<skill-name>/SKILL.md`
-  - For multiple: `cat ./.agent/skills/skill-one/SKILL.md ./.agent/skills/skill-two/SKILL.md`
 - The skill content will load with detailed instructions on how to complete the task
 - Skills are stored locally in ./.agent/skills/ directory
 
@@ -56,11 +55,11 @@ Usage notes:
 ## Project Metadata
 - **Project**: Obsidian Plugin
 - **Package Manager**: pnpm
-- **Primary Commands**: `pnpm build`, `pnpm lint`, `pnpm dev`, `pnpm lint:fix`, `pnpm upgrade`
+- **Primary Commands**: `pnpm build`, `pnpm lint`, `pnpm dev`, `pnpm lint:fix`
 
 ## Core Policies
-- **CRITICAL**: Never perform automatic git operations. AI agents must not execute `git commit`, `git push`, or any command that automatically stages or commits changes without explicit user approval for each step.
+- **CRITICAL**: Never perform automatic git operations. AI agents must not execute `git commit`, `git push`, or any command that automatically stages or commits changes without explicit user approval.
 
 ## Terminology
-- Use **"properties"** (never "frontmatter" or "front-matter") when referring to YAML metadata at the top of Markdown files.
+- Use **"properties"** when referring to YAML metadata at the top of Markdown files.
 - **"Markdown"** is a proper noun and must always be capitalized.

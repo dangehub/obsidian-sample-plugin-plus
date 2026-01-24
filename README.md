@@ -25,10 +25,7 @@ pnpm install
 # 2. Initialize localized skill set (.agent/skills/)
 pnpm obsidian-dev-skills
 
-# 3. Align AGENTS.md with available skills
-npx openskills sync
-
-# 4. Set up reference materials (symlinks to core Obsidian repos)
+# 3. Set up reference materials (symlinks to core Obsidian repos)
 .\scripts\setup-ref-links.bat  # Windows  
 # or  [header-9](#header-9)
 bash scripts/setup-ref-links.sh  # macOS/Linux
@@ -111,8 +108,7 @@ You can add these enhancements to your existing plugin:
    - `scripts/` folder → Your plugin root
 
 2. **Initialize skills**: 
-   - Run `pnpm obsidian-dev-skills` to seed the `.agent/skills/` folder.
-   - Run `npx openskills sync` to update `AGENTS.md`.
+   - Run `pnpm obsidian-dev-skills` to seed the `.agent/skills/` folder and automatically generate `AGENTS.md`.
 
 3. **Setup reference materials**:
    - **Windows**: `scripts\setup-ref-links.bat`
@@ -163,8 +159,7 @@ You can add these enhancements to your existing plugin:
 ### Using the AI System
 
 - **Bootstrapping with AI**: Before providing instructions to your AI agent, visit the `prompts/` folder. Copy the `starter-prompt.md`, fill in your project details, and provide it to your agent to perfectly initialize the development environment.
-- **Initialize Skills**: Run `pnpm obsidian-dev-skills` to populate or update the `.agent/skills/` folder with the latest localized knowledge.
-- **Sync Agents**: Run `npx openskills sync` to reflect any skill changes in `AGENTS.md`.
+- **Initialize Skills**: Run `pnpm obsidian-dev-skills` to populate or update the `.agent/skills/` folder with the latest localized knowledge and automatically update `AGENTS.md`.
 - Read `AGENTS.md` for project-specific instructions
 - Use `npx openskills read <skill-name>` to load specialized knowledge
 - Check `.agent/skills/*/references/` for deep technical guides

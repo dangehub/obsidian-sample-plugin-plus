@@ -5,8 +5,7 @@
 **1. Bootstrap & Skills Initialization**
 Before writing any code, perform these environment setup steps:
 - Verify `pnpm` is installed (install if missing).
-- Run `pnpm obsidian-dev-skills` to initialize the localized skill set (`.agent/skills/`). This script intelligently detects the project type and seeds a `project-specific` skill template.
-- Run `npx openskills sync` to align AGENTS.md with the newly installed skills.
+- Run `pnpm obsidian-dev-skills` to initialize the localized skill set (`.agent/skills/`). This script intelligently detects the project type, seeds a `project-specific` skill template, and automatically generates/updates `AGENTS.md`.
 - Run `scripts/setup-ref-links` (use `.bat` for Windows, `.sh` for Unix) to symlink core Obsidian API and documentation references into the `.ref/` folder.
 
 **2. Load Domain Knowledge**
