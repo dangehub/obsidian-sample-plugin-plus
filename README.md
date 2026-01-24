@@ -32,6 +32,7 @@ npx openskills sync
 .\scripts\setup-ref-links.bat  # Windows  
 # or  [header-9](#header-9)
 bash scripts/setup-ref-links.sh  # macOS/Linux
+```
 
 **What's included:**
 - **`AGENTS.md`** - OpenSkills entry point for AI agent guidance
