@@ -25,7 +25,10 @@ Load the following skills to ensure your implementation follows current best pra
 - **Desktop Only**: [Yes/No]
 - **External Refs (Optional)**: [GitHub URLs for reference patterns]. If used, examine licenses and credit in README.
 
-**4. Implementation Workflow**
+**4. Project Instructions**
+- [Describe your primary instructions, functional requirements, and creative brief here.]
+
+**5. Implementation Workflow**
 1. **Clarify**: Ask any necessary questions before changing code.
 2. **Scaffold**: Update `manifest.json`, `package.json`, and `README.md`. Set version to `0.0.1`.
 3. **Clean**: Remove all "sample plugin" boilerplate. Delete `styles.css` if it is not required for the implementation.
