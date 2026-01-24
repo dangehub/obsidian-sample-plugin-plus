@@ -20,6 +20,7 @@ Load the following skills to ensure your implementation follows current best pra
 - **ID**: [my-plugin]
 - **Description**: [Detailed description of what the plugin does.]
 - **Author**: [Name]
+- **Author URL**: [URL]
 - **Funding**: [URL]
 - **Desktop Only**: [Yes/No]
 - **External Refs (Optional)**: [GitHub URLs for reference patterns]. If used, examine licenses and credit in README.
