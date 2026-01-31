@@ -55,7 +55,10 @@ Usage notes:
 ## Project Metadata
 - **Project**: Obsidian Plugin
 - **Package Manager**: pnpm
-- **Primary Commands**: `pnpm build`, `pnpm lint`, `pnpm dev`, `pnpm lint:fix`
+- **Primary Commands**: `pnpm build`, `pnpm lint`, `pnpm dev`, `pnpm deploy`, `pnpm lint:fix`
+
+## 🔍 Debugging Capabilities
+- **Chrome DevTools MCP**: This project supports UI debugging via [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp). If the user has started Obsidian with `--remote-debugging-port=9222`, you can use the `chrome-devtools` MCP tools to inspect the DOM, view console logs, and interact with the UI. Use this to verify your changes or debug UI issues.
 
 ## Core Policies
 - **CRITICAL**: Never perform automatic git operations. AI agents must not execute `git commit`, `git push`, or any command that automatically stages or commits changes without explicit user approval.

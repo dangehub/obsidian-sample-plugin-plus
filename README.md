@@ -1,5 +1,9 @@
 # Obsidian Sample Plugin Plus
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[中文文档](docs/README.zh-CN.md)
+
 This is a sample plugin for [Obsidian](https://obsidian.md) with AI-assisted development tools and best practices.
 
 This project uses TypeScript to provide type checking and documentation. The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
@@ -97,6 +101,31 @@ These tools can significantly improve your plugin development workflow:
    pnpm lint
    ```
 5. **Start developing**: `pnpm dev`
+6. **Debug with Chrome MCP**: (Optional) Use [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp) to debug your plugin directly from your IDE's AI assistant.
+
+### 🔍 Debugging with Chrome DevTools MCP
+
+You can now use [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp) to debug Obsidian directly from your AI agent. This allows the AI to inspect the DOM, check the console, and interact with the Obsidian UI.
+
+#### Setup
+
+1. **Install MCP**: Install the Chrome DevTools MCP in your IDE (e.g., Cursor, VS Code) following the [official documentation](https://github.com/ChromeDevTools/chrome-devtools-mcp).
+2. **Launch Obsidian with remote debugging**:
+   
+   Launch Obsidian with remote debugging enabled:
+   
+   - **macOS**: `open -a Obsidian --args --remote-debugging-port=9222`
+   - **Linux**: `obsidian --remote-debugging-port=9222`
+   - **Windows (PowerShell)**: `& "$env:LOCALAPPDATA\Obsidian\Obsidian.exe" --remote-debugging-port=9222`
+
+   > **Tip**: Alias this to something short like `obsdev`.
+
+#### Why use this?
+When enabled, your AI assistant can:
+- **Take snapshots** of the current Obsidian state.
+- **Inspect the DOM** to help write CSS or locate elements.
+- **View console logs** to debug errors in real-time.
+- **Simulate interactions** like clicking buttons or opening commands.
 
 ### For Existing Plugins (Upgrading to This System)
 
@@ -153,8 +182,21 @@ You can add these enhancements to your existing plugin:
 - `pnpm install` to install dependencies (or `npm install` - it will automatically proxy to pnpm)
 - **Development**: `pnpm dev` - Builds to `main.js` in root with watch mode
 - **Production**: `pnpm build` - Builds to `main.js` in root (one-time build)
+- **Deploy**: `pnpm deploy` - Build and automatically copy to your Obsidian test vault.
 
-**Note**: This project uses pnpm, but `npm install`, `npm run build`, `npm run dev`, and `npm run lint` will also work for backwards compatibility. The `npm install` command automatically proxies to `pnpm install` via a preinstall hook.
+#### Setting up Deploy
+
+The `deploy` command helps you automatically copy build artifacts to your local Obsidian vault for testing.
+
+1. Create `deploy.config.local.json` in the project root:
+   ```json
+   {
+       "targetDir": "C:\\path\\to\\your\\.obsidian\\plugins\\your-plugin-id"
+   }
+   ```
+2. Run `pnpm deploy`. This command is gitignored to keep your local paths private.
+
+**Note**: This project uses pnpm, but `npm install`, `npm run build`, `npm run dev`, `npm run deploy`, and `npm run lint` will also work for backwards compatibility.
 
 ### Using the AI System
 
