@@ -18,7 +18,7 @@ Load the following skills to ensure your implementation follows current best pra
 **3. Plugin Specification**
 - **Name**: [My Plugin]
 - **ID**: [my-plugin]
-- **Description**: [Detailed description of what the plugin does.]
+- **Description**: [One-line description of what the plugin does.]
 - **Author**: [Name]
 - **Author URL**: [URL]
 - **Funding**: [URL]
